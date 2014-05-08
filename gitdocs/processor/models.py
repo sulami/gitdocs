@@ -13,6 +13,9 @@ class Docs(models.Model):
     def get_latest_version(self):
         return self.get_versions().last()
 
+    def __str__(self):
+        return self.name
+
 class Version(models.Model):
     name = models.CharField(max_length=30)
     content = models.TextField()
