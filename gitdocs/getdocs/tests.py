@@ -26,7 +26,7 @@ class GetDocsTestCase(TestCase):
         docs = get_docs('sulami', 'Test')
         self.assertIsNotNone(docs)
 
-    # def test_get_not_existing_docs(self):
-        # notdocs = get_docs('foo', 'bar')
-        # self.assertIsNone(notdocs)
+    def test_get_not_existing_docs(self):
+        notdocs = get_docs('foo', 'bar')
+        self.assertIsNone(notdocs)
 
