@@ -4,14 +4,15 @@ from processor.models import Docs, Version
 
 class ProcessDocsTestCase(TestCase):
     def setUp(self):
-        docs = Docs()
-        docs.owner = 'sulami'
-        docs.name = 'Test'
-        docs.save()
-        ver = Version()
-        ver.name = 'master'
-        ver.content = '# Test'
-        ver.save()
+        self.docs = Docs()
+        self.docs.owner = 'sulami'
+        self.docs.name = 'Test'
+        self.docs.save()
+        self.ver = Version()
+        self.ver.name = 'master'
+        self.ver.content = '# Test'
+        self.ver.save()
+        self.docs.versions.add(self.ver)
 
     def test_readme_gets_processed(self):
         docs = process_docs('# Test')
@@ -24,6 +25,7 @@ class ProcessDocsTestCase(TestCase):
         docs = Docs.objects.get(pk=1)
         self.assertEqual(docs.owner, 'sulami')
         self.assertEqual(docs.name, 'Test')
+        self.assertIn(self.ver, docs.versions.all())
 
     def test_version_model_holds_data(self):
         ver = Version.objects.get(pk=1)
