@@ -1,9 +1,13 @@
 from django.db import models
+from github import Github
 
 class GitHubWrapper(models.Model):
     def get_docs(self, owner, repo):
-        if owner == 'sulami' and repo == 'dotfiles':
+        try:
+            g = Github()
+            u = g.get_user(owner)
+            r = u.get_repo(repo)
             return 0
-        else:
+        except:
             raise self.DoesNotExist
 
