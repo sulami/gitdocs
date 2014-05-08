@@ -27,7 +27,7 @@ class GetDocsTestCase(TestCase):
         self.assertIsNotNone(docs)
 
     def test_get_docs_from_gh(self):
-        docs = get_docs('sulami', 'dotfiles')
+        docs = get_docs('sulami', 'blog')
         self.assertIsNotNone(docs)
 
     def test_get_not_existing_docs(self):
