@@ -7,7 +7,7 @@ class ProcessDocsTestCase(TestCase):
         docs = process_docs('# Test')
         self.assertEqual(docs, '<h1>Test</h1>')
 
-    def test_doc_model(self):
+    def test_docs_model(self):
         docs = Docs()
         self.assertIsNotNone(docs)
 
