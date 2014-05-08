@@ -34,3 +34,12 @@ class GetDocsTestCase(TestCase):
         notdocs = get_docs('foo', 'bar')
         self.assertIsNone(notdocs)
 
+    def test_save_docs_fetched_from_github(self):
+        try: docs = Docs.objects.get(owner='sulami', name='blog')
+        except: docs = None
+        self.assertIsNone(docs)
+        get_docs('sulami', 'blog')
+        try: docs = Docs.objects.get(owner='sulami', name='blog')
+        except: docs = None
+        self.assertIsNotNone(docs)
+

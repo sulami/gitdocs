@@ -8,6 +8,9 @@ def get_docs(owner, repo):
         gh = GitHubWrapper()
         try:
             qset = gh.get_docs(owner, repo)
+            docs = Docs(owner=owner, name=repo)
+            docs.save()
+            return 0
         except GitHubWrapper.DoesNotExist:
             qset = None
     return qset
