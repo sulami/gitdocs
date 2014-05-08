@@ -15,11 +15,8 @@ class ProcessDocsTestCase(TestCase):
         self.docs.versions.add(self.ver)
 
     def test_readme_gets_processed(self):
-        docs = process_docs('# Test')
+        docs = process_docs(self.ver.content)
         self.assertEqual(docs, '<h1>Test</h1>')
-
-    def test_docs_model(self):
-        self.assertIsNotNone(Docs.objects.get(pk=1))
 
     def test_docs_model_holds_data(self):
         docs = Docs.objects.get(pk=1)
