@@ -29,3 +29,7 @@ class ProcessDocsTestCase(TestCase):
         self.assertEqual(ver.name, 'master')
         self.assertEqual(ver.content, '# Test')
 
+    def test_docs_returns_latest_first(self):
+        ver = self.docs.get_latest_version()
+        self.assertEqual(ver, self.ver)
+
