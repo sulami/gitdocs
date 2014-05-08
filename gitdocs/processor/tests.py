@@ -65,3 +65,12 @@ class ProcessDocsTestCase(TestCase):
         self.assertEqual(versions[3].name, 'master')
         self.docs.versions.remove(tmp)
 
+    def test_docs_returns_nothing_when_nothing_there(self):
+        docs = Docs(owner='foo', name='bar')
+        docs.save()
+        latest = docs.get_latest_version()
+        self.assertIsNone(latest)
+        alls = docs.get_versions()
+        self.assertTrue(alls.count() == 0)
+        docs.delete()
+
