@@ -4,21 +4,13 @@ from processor.models import Docs, Version
 
 class ProcessDocsTestCase(TestCase):
     def setUp(self):
-        self.docs = Docs()
-        self.docs.owner = 'sulami'
-        self.docs.name = 'Test'
+        self.docs = Docs(owner='sulami', name='Test')
         self.docs.save()
-        self.verm = Version()
-        self.verm.name = 'master'
-        self.verm.content = '# Test'
+        self.verm = Version(name='master', content='# Test')
         self.verm.save()
-        self.ver1 = Version()
-        self.ver1.name = '0.1'
-        self.ver1.content = '# Not master'
+        self.ver1 = Version(name='0.1', content='# Not master')
         self.ver1.save()
-        self.ver2 = Version()
-        self.ver2.name = '0.2'
-        self.ver2.content = '# Not really master'
+        self.ver2 = Version(name='0.2', content='# Not really master')
         self.ver2.save()
         self.docs.versions.add(self.verm)
         self.docs.versions.add(self.ver1)
