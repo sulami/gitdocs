@@ -5,5 +5,5 @@ class GitHubWrapper(models.Model):
         if owner == 'sulami' and repo == 'dotfiles':
             return 0
         else:
-            raise GitHubWrapper.DoesNotExist
+            raise self.DoesNotExist
 
