@@ -30,6 +30,27 @@ class ProcessDocsTestCase(TestCase):
         self.assertEqual(ver.content, '# Test')
 
     def test_docs_returns_latest_first(self):
+        tmp = Version()
+        tmp.name = '0.1'
+        tmp.content = '# Not master'
+        tmp.save()
+        self.docs.versions.add(tmp)
         ver = self.docs.get_latest_version()
         self.assertEqual(ver, self.ver)
+
+    def test_docs_returns_latest_first_without_master(self):
+        self.docs.versions.remove(self.ver) # Get rid of master
+        tmp = Version()
+        tmp.name = '0.1'
+        tmp.content = '# Not master'
+        tmp.save()
+        tmp2 = Version()
+        tmp2.name = '0.2'
+        tmp2.content = '# Not really master'
+        tmp2.save()
+        self.docs.versions.add(tmp2)
+        self.docs.versions.add(tmp)
+        latest = self.docs.get_latest_version()
+        self.assertEqual(latest, tmp2)
+        self.docs.versions.add(self.ver) # Readd master
 
