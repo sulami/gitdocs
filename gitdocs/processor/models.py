@@ -6,11 +6,12 @@ class Docs(models.Model):
     name = models.CharField(max_length=30)
     versions = models.ManyToManyField('Version')
 
+    def get_versions(self):
+        sort = self.versions.all().order_by('name')
+        return sort
+
     def get_latest_version(self):
-        try:
-            return self.versions.get(name='master')
-        except:
-            return natsorted(self.versions.all(), number_type=None)[-1]
+        return self.get_versions().last()
 
 class Version(models.Model):
     name = models.CharField(max_length=30)
