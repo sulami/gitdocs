@@ -1,5 +1,4 @@
 from django.db import models
-from natsort import natsorted
 
 class Docs(models.Model):
     owner = models.CharField(max_length=30)
