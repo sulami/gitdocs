@@ -1,3 +1,6 @@
+from markdown import markdown
+
 def process_docs(instr):
-    return('<h1>Test</h1>')
+    outstr = markdown(instr)
+    return(outstr)
 
