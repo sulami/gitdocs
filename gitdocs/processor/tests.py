@@ -58,7 +58,12 @@ class ProcessDocsTestCase(TestCase):
 
     def test_docs_return_ordered_list_of_versions(self):
         versions = self.docs.get_versions()
+        tmp = Version(name='1.0', content='')
+        tmp.save()
+        self.docs.versions.add(tmp)
         self.assertEqual(versions[0].name, '0.1')
         self.assertEqual(versions[1].name, '0.2')
-        self.assertEqual(versions[2].name, 'master')
+        self.assertEqual(versions[2].name, '1.0')
+        self.assertEqual(versions[3].name, 'master')
+        self.docs.versions.remove(tmp)
 
