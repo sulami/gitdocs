@@ -16,6 +16,12 @@ class ProcessDocsTestCase(TestCase):
         self.docs.versions.add(self.ver1)
         self.docs.versions.add(self.ver2)
 
+    def tearDown(delf):
+        for doc in Docs.objects.all():
+            doc.delete()
+        for ver in Version.objects.all():
+            ver.delete()
+
     def test_readme_gets_processed(self):
         docs = process_docs(self.verm.content)
         self.assertEqual(docs, '<h1>Test</h1>')
