@@ -27,7 +27,7 @@ class GetDocsTestCase(TestCase):
         self.assertIsNotNone(docs)
 
     def test_get_docs_from_gh(self):
-        docs = get_docs('sulami', 'blog')
+        docs = get_docs('sulami', 'dotfiles')
         self.assertIsNotNone(docs)
 
     def test_get_not_existing_docs(self):
@@ -35,11 +35,11 @@ class GetDocsTestCase(TestCase):
         self.assertIsNone(notdocs)
 
     def test_save_docs_fetched_from_github(self):
-        try: docs = Docs.objects.get(owner='sulami', name='blog')
+        try: docs = Docs.objects.get(owner='sulami', name='dotfiles')
         except: docs = None
         self.assertIsNone(docs)
-        get_docs('sulami', 'blog')
-        try: docs = Docs.objects.get(owner='sulami', name='blog')
+        get_docs('sulami', 'dotfiles')
+        try: docs = Docs.objects.get(owner='sulami', name='dotfiles')
         except: docs = None
         self.assertIsNotNone(docs)
 
