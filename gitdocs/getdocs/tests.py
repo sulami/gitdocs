@@ -42,4 +42,8 @@ class GetDocsTestCase(TestCase):
         try: docs = Docs.objects.get(owner='sulami', name='dotfiles')
         except: docs = None
         self.assertIsNotNone(docs)
+        vers = []
+        for v in docs.versions.all():
+            vers.append(v.name)
+        self.assertIn('master', vers)
 
