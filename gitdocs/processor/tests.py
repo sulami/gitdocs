@@ -11,3 +11,12 @@ class ProcessDocsTestCase(TestCase):
         docs = Docs()
         self.assertIsNotNone(docs)
 
+    def test_docs_model_holds_data(self):
+        tmp = Docs()
+        tmp.owner = 'sulami'
+        tmp.content = 'Test'
+        tmp.save()
+        docs = Docs.objects.get(pk=1)
+        self.assertEqual(docs.owner, 'sulami')
+        self.assertEqual(docs.content, 'Test')
+
