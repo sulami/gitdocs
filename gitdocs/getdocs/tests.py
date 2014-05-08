@@ -46,4 +46,6 @@ class GetDocsTestCase(TestCase):
         for v in docs.versions.all():
             vers.append(v.name)
         self.assertIn('master', vers)
+        master = docs.versions.get(name='master')
+        self.assertIn('These are my dotfiles', master.content)
 
