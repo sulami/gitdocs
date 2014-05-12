@@ -5,6 +5,7 @@ class Docs(models.Model):
     owner = models.CharField(max_length=30)
     name = models.CharField(max_length=30)
     versions = models.ManyToManyField('Version')
+    time = models.DateField(auto_now=True)
 
     def get_versions(self):
         sort = self.versions.all().order_by('-name').exclude(name='master')

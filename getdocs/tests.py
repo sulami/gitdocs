@@ -1,6 +1,7 @@
 from django.test import TestCase
 from getdocs.functions import get_docs
 from processor.models import Docs, Version
+from datetime import date, timedelta
 
 class GetDocsTestCase(TestCase):
     def setUp(self):
@@ -48,4 +49,12 @@ class GetDocsTestCase(TestCase):
         self.assertIn('master', vers)
         master = docs.versions.get(name='master')
         self.assertIn('These are my dotfiles', master.content)
+
+    def test_old_docs_get_refreshed(self):
+        self.docs.time = date.today() + timedelta(days=-8)
+        self.docs.save()
+        get_docs(self.docs.owner, self.docs.name)
+        self.assertEqual(self.docs.time, date.today())
+        self.docs.time = date.today()
+        self.docs.save()
 
