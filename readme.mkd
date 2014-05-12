@@ -1,0 +1,9 @@
+# GitDocs
+
+GitDocs is a simple framework to provide versioned readmes for GitHub
+Repositories. It uses the GitHub API to fetch and cache the readmes for the
+master branch and all tags and provides a simple way of reading the docs of
+older versions, provided they are properly tagged.
+
+Powered by Django and Python.
+
