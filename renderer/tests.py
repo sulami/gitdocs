@@ -1,3 +1,15 @@
-from django.test import TestCase
+from django.test import TestCase, LiveServerTestCase
+from selenium import webdriver
 
-# Create your tests here.
+class FunctionalTestCase(LiveServerTestCase):
+    def setUp(self):
+        self.browser = webdriver.Firefox()
+
+    def tearDown(self):
+        self.browser.quit()
+
+    def test_sitereplies(self):
+        self.browser.get('http://localhost:8081')
+        self.browser.implicitly_wait(5)
+        self.assertIn('', self.browser.title)
+
