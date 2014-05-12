@@ -7,13 +7,21 @@ def index(request):
 
 def repo(request, username, reponame):
     docs = get_docs(username, reponame)
-    master = docs.get_latest_version()
+    version = docs.get_latest_version()
+    if version is None:
+        # 404
+        pass
     return HttpResponse('<title>%s/%s</title>%s'.format(username,
                                                         reponame,
-                                                        master))
+                                                        version))
 
 def version(request, username, reponame, versionname):
-    return HttpResponse('<title>%s/%s/%s</title>'.format(username,
+    docs = get_docs(username, reponame)
+    version = docs.get_version(versionname)
+    if version is None:
+        # 404
+        pass
+    return HttpResponse('<title>%s/%s/%s</title>%s'.format(username,
                                                          reponame,
-                                                         versionname))
+                                                         version))
 
