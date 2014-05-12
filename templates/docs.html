@@ -3,6 +3,7 @@
 {% block title %}{{ username }}/{{ repo }}/{{ version }}{% endblock %}
 
 {% block content %}
+<a href="{% url 'renderer:version' username repo repo.get_latest_version %}">{{ repo.get_latest_version }}</a>
 {% for v in repo.get_versions.all %}
     <a href="{% url 'renderer:version' username repo v %}">{{ v }}</a>
 {% endfor %}

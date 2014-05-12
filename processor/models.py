@@ -7,11 +7,12 @@ class Docs(models.Model):
     versions = models.ManyToManyField('Version')
 
     def get_versions(self):
-        sort = self.versions.all().order_by('-name')
+        sort = self.versions.all().order_by('-name').exclude(name='master')
         return sort
 
     def get_latest_version(self):
-        return self.get_versions().last()
+        try: return self.versions.get(name='master')
+        except: return self.get_versions().first()
 
     def get_version(self, versionname):
         try:
