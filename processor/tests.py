@@ -1,16 +1,15 @@
 from django.test import TestCase
-from processor.functions import process_docs
 from processor.models import Docs, Version
 
 class ProcessDocsTestCase(TestCase):
     def setUp(self):
         self.docs = Docs(owner='sulami', name='Test')
         self.docs.save()
-        self.verm = Version(name='master', content='# Test')
+        self.verm = Version(name='master', content='<h1 id="test">Test</h1>')
         self.verm.save()
-        self.ver1 = Version(name='0.1', content='# Not master')
+        self.ver1 = Version(name='0.1', content='<h1>Not master</h1>')
         self.ver1.save()
-        self.ver2 = Version(name='0.2', content='# Not really master')
+        self.ver2 = Version(name='0.2', content='<h1>Not really master</h1>')
         self.ver2.save()
         self.docs.versions.add(self.verm)
         self.docs.versions.add(self.ver1)
@@ -22,20 +21,11 @@ class ProcessDocsTestCase(TestCase):
         for ver in Version.objects.all():
             ver.delete()
 
-    def test_readme_gets_processed(self):
-        docs = process_docs(self.verm.content)
-        self.assertEqual(docs, '<h1>Test</h1>')
-
     def test_docs_model_holds_data(self):
         docs = Docs.objects.get(pk=1)
         self.assertEqual(docs.owner, 'sulami')
         self.assertEqual(docs.name, 'Test')
         self.assertIn(self.verm, docs.versions.all())
-
-    def test_version_model_holds_data(self):
-        ver = Version.objects.get(pk=1)
-        self.assertEqual(ver.name, 'master')
-        self.assertEqual(ver.content, '# Test')
 
     def test_docs_returns_latest_first(self):
         tmp = Version()
@@ -82,5 +72,5 @@ class ProcessDocsTestCase(TestCase):
         self.assertIsNotNone(ver)
 
     def test_version_renders_markdown(self):
-        self.assertEqual(self.verm.get_markdown(), '<h1 id="test">Test</h1>')
+        self.assertEqual(self.verm.content, '<h1 id="test">Test</h1>')
 

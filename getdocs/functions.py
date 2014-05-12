@@ -1,6 +1,7 @@
 from processor.models import Docs, Version
 from getdocs.models import GitHubWrapper
 from datetime import date, timedelta
+from markdown import markdown
 
 def get_docs(owner, repo):
     try:
@@ -19,11 +20,15 @@ def fetch_docs(owner, repo):
         docs = Docs(owner=owner, name=repo)
         docs.save()
         for version in query:
-            v = Version(name=version[0], content=version[1])
+            v = Version(name=version[0],
+                        content=render_markdown(version[1]))
             v.save()
             docs.versions.add(v)
         qset = Docs.objects.get(owner=owner, name=repo)
     except GitHubWrapper.DoesNotExist:
         qset = None
     return qset
+
+def render_markdown(text):
+    return markdown(text, extensions=['codehilite', 'toc',])
 
