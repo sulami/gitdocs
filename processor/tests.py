@@ -59,10 +59,9 @@ class ProcessDocsTestCase(TestCase):
         tmp = Version(name='1.0', content='')
         tmp.save()
         self.docs.versions.add(tmp)
-        self.assertEqual(versions[0].name, '0.1')
+        self.assertEqual(versions[0].name, '1.0')
         self.assertEqual(versions[1].name, '0.2')
-        self.assertEqual(versions[2].name, '1.0')
-        self.assertEqual(versions[3].name, 'master')
+        self.assertEqual(versions[2].name, '0.1')
         self.docs.versions.remove(tmp)
 
     def test_docs_returns_nothing_when_nothing_there(self):
