@@ -3,16 +3,37 @@
 {% block title %}{{ username }}/{{ repo }}/{{ version }}{% endblock %}
 
 {% block content %}
+<div id="sidebar">
+<div id="logo">
+    GitDocs
+</div>
+<div id="sublogo">
+    <span style="color: #586e75">by</a> <a href="https://github.com/sulami">sulami</a>
+</div>
+<div class="sidebar_h">
+Repo:
+</div>
+<a href="https://github.com/{{ username }}/{{ repo }}">{{ repo }}</a><br />
+<span style="color: #586e75">by</span><br />
+<a href="https://github.com/{{ username }}">{{ username }}</a><br />
+
+<div class="sidebar_h">Version:</div>
 {% if repo.get_latest_version.name == 'master' %}
+<li class="versionlink">
 <a href="{% url 'renderer:version' username repo repo.get_latest_version %}">
     {{ repo.get_latest_version }}</a>
+</li>
 {% endif %}
 {% for v in repo.get_versions.all %}
+<li class="versionlink">
     <a href="{% url 'renderer:version' username repo v %}">{{ v }}</a>
+</li>
 {% endfor %}
-<hr />
+</div>
+<div id="content">
 {% autoescape off %}
 {{ version.content }}
 {% endautoescape %}
+</div>
 {% endblock %}
 
