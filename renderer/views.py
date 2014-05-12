@@ -16,7 +16,9 @@ def repo(request, username, reponame):
     version = docs.get_latest_version()
     if version is None:
         return HttpResponse(notfound)
-    return HttpResponse(template.format(username, reponame, version))
+    return HttpResponse(template.format(username,
+                                        reponame,
+                                        version.get_markdown()))
 
 def version(request, username, reponame, versionname):
     docs = get_docs(username, reponame)
@@ -25,5 +27,8 @@ def version(request, username, reponame, versionname):
     version = docs.get_version(versionname)
     if version is None:
         return HttpResponse(notfound)
-    return HttpResponse(template2.format(username, reponame, version, version))
+    return HttpResponse(template2.format(username,
+                                         reponame,
+                                         version,
+                                         version.get_markdown()))
 
