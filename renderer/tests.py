@@ -9,7 +9,7 @@ class FunctionalTestCase(LiveServerTestCase):
         self.browser.quit()
 
     def test_sitereplies(self):
-        self.browser.get('http://localhost:8081')
-        self.browser.implicitly_wait(5)
-        self.assertIn('', self.browser.title)
+        self.browser.get('http:localhost:8081')
+        self.browser.implicitly_wait(3)
+        self.assertIn('Django', self.browser.title)
 
