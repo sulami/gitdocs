@@ -26,7 +26,7 @@ class FunctionalTestCase(LiveServerTestCase):
     def test_open_repo(self):
         self.browser.get('http:localhost:8081/sulami/dotfiles/')
         self.browser.implicitly_wait(3)
-        self.assertEqual('sulami/dotfiles', self.browser.title)
+        self.assertEqual('sulami/dotfiles/master', self.browser.title)
 
     def test_open_version(self):
         self.browser.get('http:localhost:8081/sulami/dotfiles/master/')
