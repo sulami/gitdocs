@@ -74,3 +74,6 @@ class ProcessDocsTestCase(TestCase):
         self.assertTrue(alls.count() == 0)
         docs.delete()
 
+    def test_version_renders_markdown(self):
+        self.assertEqual(self.verm.get_markdown(), '<h1 id="test">Test</h1>')
+

@@ -1,4 +1,5 @@
 from django.db import models
+from markdown import markdown
 
 class Docs(models.Model):
     owner = models.CharField(max_length=30)
@@ -18,6 +19,11 @@ class Docs(models.Model):
 class Version(models.Model):
     name = models.CharField(max_length=30)
     content = models.TextField()
+
+
+    def get_markdown(self):
+        return markdown(self.content, extensions=['codehilite',
+                                                  'toc',])
 
     def __str__(self):
         return self.name
