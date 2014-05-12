@@ -20,7 +20,6 @@ class Version(models.Model):
     name = models.CharField(max_length=30)
     content = models.TextField()
 
-
     def get_markdown(self):
         return markdown(self.content, extensions=['codehilite', 'toc',])
 
