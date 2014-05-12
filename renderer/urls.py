@@ -3,7 +3,8 @@ from renderer.views import *
 
 urlpatterns = patterns('renderer.views',
     url(r'^$', 'index', name='index'),
-    url(r'(\d+)/(\d+)/$', 'repo', name='repo'),
-    url(r'(\d+)/(\d+)/(\d+)/$', 'version', name='version'),
+    url(r'(?P<username>[\w]+)/(?P<reponame>[\w]+)/(?P<versionname>[\w]+)/$',
+        'version', name='version'),
+    url(r'(?P<username>[\w]+)/(?P<reponame>[\w]+)/$', 'repo', name='repo'),
 )
 
