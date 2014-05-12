@@ -21,6 +21,7 @@ SECRET_KEY = '3gwy_^4#memp2%&cgpsx^1b@%f^%=z(!2%v!!w3_jjzk*k#3!h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+TEST_RUNNER="redgreenunittest.django.runner.RedGreenDiscoverRunner"
 
 TEMPLATE_DEBUG = True
 
