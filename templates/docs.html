@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ username }}/{{ repo }}/{{ version }}{% endblock %}
+
+{% block content %}
+{% for v in repo.get_versions.all %}
+    <a href="{% url 'renderer:version' username repo v %}">{{ v }}</a>
+{% endfor %}
+<hr />
+{% autoescape off %}
+{{ version.get_markdown }}
+{% endautoescape %}
+{% endblock %}
+

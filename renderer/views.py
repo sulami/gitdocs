@@ -5,8 +5,6 @@ from django.http import HttpResponse
 def index(request):
     return HttpResponse('<title>Django</title>')
 
-template = '<html><head><title>{}/{}</title></head><body>{}</body></html>'
-template2 = '<html><head><title>{}/{}/{}</title></head><body>{}</body></html>'
 notfound = '<html><head><title>Not Found</title></head><body></body></html>'
 
 def repo(request, username, reponame):
@@ -16,9 +14,10 @@ def repo(request, username, reponame):
     version = docs.get_latest_version()
     if version is None:
         return HttpResponse(notfound)
-    return HttpResponse(template.format(username,
-                                        reponame,
-                                        version.get_markdown()))
+    context = {'username': username,
+               'repo': docs,
+               'version': version}
+    return render(request, 'docs.html', context)
 
 def version(request, username, reponame, versionname):
     docs = get_docs(username, reponame)
@@ -27,8 +26,8 @@ def version(request, username, reponame, versionname):
     version = docs.get_version(versionname)
     if version is None:
         return HttpResponse(notfound)
-    return HttpResponse(template2.format(username,
-                                         reponame,
-                                         version,
-                                         version.get_markdown()))
+    context = {'username': username,
+               'repo': docs,
+               'version': version}
+    return render(request, 'docs.html', context)
 
