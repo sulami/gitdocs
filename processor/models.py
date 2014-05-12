@@ -22,8 +22,7 @@ class Version(models.Model):
 
 
     def get_markdown(self):
-        return markdown(self.content, extensions=['codehilite',
-                                                  'toc',])
+        return markdown(self.content, extensions=['codehilite', 'toc',])
 
     def __str__(self):
         return self.name
