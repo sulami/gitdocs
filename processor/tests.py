@@ -74,6 +74,14 @@ class ProcessDocsTestCase(TestCase):
         self.assertTrue(alls.count() == 0)
         docs.delete()
 
+    def test_docs_return_nothing_when_version_not_there(self):
+        ver = self.docs.get_version('muster')
+        self.assertIsNone(ver)
+
+    def test_docs_return_version_when_version_exists(self):
+        ver = self.docs.get_version('master')
+        self.assertIsNotNone(ver)
+
     def test_version_renders_markdown(self):
         self.assertEqual(self.verm.get_markdown(), '<h1 id="test">Test</h1>')
 

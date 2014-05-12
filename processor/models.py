@@ -13,6 +13,12 @@ class Docs(models.Model):
     def get_latest_version(self):
         return self.get_versions().last()
 
+    def get_version(self, versionname):
+        try:
+            return self.versions.get(name=versionname)
+        except:
+            return None
+
     def __str__(self):
         return self.name
 
