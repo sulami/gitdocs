@@ -17,6 +17,17 @@ a {
 a:hover {
     color: #6c71c4;
 }
+div#center {
+    margin: auto;
+    margin-top: 33%;
+}
+div.hor {
+    text-align: center;
+    width: 100%;
+}
+span.lowlight {
+    color: #586e75;
+}
 div#sidebar {
     border-right: 1px #657b83 solid;
     float: left;

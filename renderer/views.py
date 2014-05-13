@@ -3,7 +3,7 @@ from getdocs.functions import get_docs
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse('<title>Django</title>')
+    return render(request, 'index.html')
 
 notfound = '<html><head><title>Not Found</title></head><body></body></html>'
 
