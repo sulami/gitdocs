@@ -5,5 +5,10 @@ Repositories. It uses the GitHub API to fetch and cache the readmes for the
 master branch and all tags and provides a simple way of reading the docs of
 older versions, provided they are properly tagged.
 
+It also provides a nicer output compared to Github, using colors more friendly
+to the eye and syntax highlighting for code snippets. You can use the same link
+style as on Github to link to specific parts of the docs or generate a list of
+contents by linking to #my-subheading.
+
 Powered by Django and Python.
 
